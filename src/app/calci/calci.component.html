@@ -1,0 +1,72 @@
+
+
+<html>
+    <body class="container1">
+    <div class="container py-5 h-100 ">
+        <div><h1 class="text-center text-white">CRYPTOCURRENCY PROFIT CALCULATOR</h1></div><br><br>
+        <!-- for coin name -->
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class=" col-md-8 col-lg-6 col-xl-4 justify-content-center text-white">
+          <label>Coin Name:</label>
+            <div class="input-group rounded mb-3">
+                <input type="text" id="search" [(ngModel)]="search" class="form-control rounded" placeholder="Coin Name" />
+              </div>
+      
+        </div>
+         <!-- for price per coin -->
+            <div class=" col-md-8 col-lg-6 col-xl-4 justify-content-center text-white">
+              <label>Price Per Coin:</label>
+                <div class="input-group rounded mb-3">
+                    <input type="number" id="price_per_coin" [(ngModel)]="price_per_coin" class="form-control rounded" placeholder="Price per Coin" />
+                  </div>
+          
+            </div>
+    
+        </div>
+        <!-- for total investment -->
+        <div class="row d-flex justify-content-center align-items-center h-100 text-white">
+            <div class=" col-md-8 col-lg-6 col-xl-4 justify-content-center">
+              <label>Total Investment:</label>
+                <div class="input-group rounded mb-3">
+                  
+                    <input type="number" id="total_investment" [(ngModel)]="total_investment"  class="form-control rounded" placeholder="Total Investment" />
+                  </div>
+            </div>
+              </div>
+              <!-- for buttton -->
+              <div class="row d-flex justify-content-center align-items-center h-100 text-white">
+                <div class=" col-md-8 col-lg-6 col-xl-4 justify-content-center">
+                    <button type="button" (click)="getData1()" class="btn btn-primary  btn-rounded col-md-8 col-lg-12  justify-content-center">Calculate</button>
+    
+                  </div>
+              </div><br><br>
+    <div class="row d-flex justify-content-center align-items-center h-100 container text-white">
+    
+        <div class=" border col-sm-4" >
+            <div class="text-center text-white" >
+              <h3 class="mb-3">Details</h3>
+              <p class="mb-2">{{data[0].name}}({{data[0].symbol|uppercase}})</p>
+              <p>Rank :<strong>{{data[0].market_cap_rank}}</strong></p>
+              <p class="mb-2">Current Price : <strong>  {{data[0].current_price|currency:'INR'}} </strong></p>
+              <p class="mb-2 ">High_24h : <strong>{{data[0].high_24h|currency:'INR'}}</strong> </p>
+              <p class="mb-2 ">Low_24h  :<strong>{{data[0].low_24h|currency:'INR'}}</strong></p>
+            </div>
+        </div>
+        <div class=" border col-sm-4" >
+            <div class="text-center text-white " >
+              <h3 class="mb-3">Result</h3>
+              <p class="mb-2">Price Per Coin :<strong>{{price_per_coin | currency:'INR'}}</strong></p>
+              <p class="mb-2 ">Profit Per Coin :   <strong>  {{data[0].current_price-price_per_coin|currency:'INR'}} </strong></p>
+              <!-- <img class="col-md-12 img {width:100%}" src="{{i.image}}"> -->
+              <p>Total Coins :<strong>{{(total_investment/price_per_coin).toFixed(2)}}</strong></p>
+              <p class="mb-2 ">Total Price : <strong>{{(data[0].current_price-price_per_coin)*(total_investment/price_per_coin)|currency:'INR'}}</strong> </p>
+              <p class="mb-2 " *ngIf="(data[0].current_price-price_per_coin)*(total_investment/price_per_coin)>0;else elseTemplate"><strong class="text-success">GAIN</strong></p>
+              <ng-template #elseTemplate>
+                <strong class="text-danger">LOSS</strong>
+            </ng-template>
+            </div>
+        </div>
+          </div>
+    </div>
+    </body>
+    </html>
